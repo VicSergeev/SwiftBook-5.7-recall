@@ -441,4 +441,44 @@ for (key, value) in someDict {
 }
 
 // control flow
+// there are statements in Swift to control flow of code execution
+// while - perform tasks until some condition become false
+// if, guard, switch - for execution of different branches of code depending on conditions
+// break, continue - passing flow to the next block of code
+// for in loop - to iterate thru dicts, arrays, sets, strings
+
+// switch - cases can be used with WHERE for each case
+
+// for in loop - can be used with dictionaries, decompose it to tuple
+var legs = ["Cat":4, "Human":2]
+for (animal, numOfLegs) in legs {
+    print("\(animal) has \(numOfLegs) legs")
+}
+
+// if specific sequence is not needed you can ignore temp variable in for in loop using "_" underscore
+let base = 3
+let powerOf = 10
+var answerIs = 1
+for _ in 1...powerOf {
+    answerIs *= base
+    print("The \(base) to the power of \(powerOf) is \(answerIs)")
+}
+
+// while loop - checks condition before each new iteration, executes until condition is true
+var countDown = 19
+while countDown != 0 {
+    countDown -= 1
+    print("T-minus \(countDown)")
+}
+if countDown == 0 {
+    print("we have lift off!!!")
+}
+
+// repeat-while loop execute first and then checks if condition is true
+var numberOne = 0
+repeat {
+    print("current number is \(numberOne)")
+    numberOne += 1
+} while numberOne < 10
+print("final number is \(numberOne)")
 
