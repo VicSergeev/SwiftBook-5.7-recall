@@ -562,7 +562,7 @@ default:
 }
 
 // control tranfer statemets
-//break, continue, fallthrough, return, throw
+//break, continue, fallthrough
 
 // break - conditional code: if true -> continue, else -> break
 var checkCount = 100
@@ -588,16 +588,44 @@ for i in anotherCount {
 }
 
 // fallthrough
+switch checkCount {
+    case 2...88, 89...100:
+        print("Not sure if I understand fallthrough at 100%")
+        fallthrough // will skip this case
+    case -1...1:
+        print("this message came from case that stand after fallthru")
+default:
+    print("I think I get it")
+}
+
+// check for API availability
+// swift automaticaly checking API availability, to make sure you don't accidentally use API that unavailable on deployment target
+if #available(iOS 15, *) {
+    // use iOS 15 API
+} else {
+    // fall back to earlier iOS APIs
+}
+// * asterix - required and specifies that on any other platform, the body of the if executes on the minimum deployment target specified by your target
+
+@available(macOS 10.15, *)
+struct ColorPreference {
+    var bestColor = "blue"
+}
+func chooseBestColor() -> String {
+    guard #available(macOS 10.15, *) else {
+        return "gray"
+    }
+    let colors = ColorPreference()
+    return colors.bestColor
+}
+ 
 
 
 
 
+// functions - blocks of code that performs a specific tasks
+// to use func -> define one -> call func()
 
-
-
-
-
-// functions - blocks of code
 // func (no parameter) no return
 func doWork() {
     let smth1 = 4
@@ -630,3 +658,75 @@ func takeParamReturnValue(param: Int, pampam: Int) -> String {
     return cast
 }
 takeParamReturnValue(param: 5, pampam: 7)
+
+func returnMultiplyParam() -> (String, Double) {
+    let score = 1.67
+    let name = "Dave"
+    return ("Dave achieved", score)
+}
+returnMultiplyParam()
+
+
+//closures
+// anonymus func, unnamed, aka lambda
+
+do { //called with keyword "do"
+    print("this is a message from simple closure")
+}
+//  {(parameter)->return type in - keyword in is optional, separates closure definition from its body
+//      statement
+//}
+
+// closure is a reference type
+
+// define closure
+let closure = { // reference to closure
+    print("hello from closure") // closure body
+}
+closure() // call closure
+
+// closure take parameters
+var dogBark = {(name: String) in
+    print("\(name) is barking")
+}
+dogBark("Portos")
+
+// closure takes parameters and return values
+
+let findArea = {(num: Int) -> (Int) in
+    let area = num * num
+    return area
+}
+
+findArea(3)
+
+// anonymous value
+let rectArea: (Int) -> (Int) = { $0 * $0 }
+// const reference to int->int closure, whis is a multiplication on it self $0-1st param, $1-2nd param(if exist) and so on
+print(rectArea(5))
+// with two or more parameters
+let rectArea2: (Int, Int, Int) -> (Int) = { ($0 * $1) / $2 }
+print(rectArea2(9, 7, 4))
+
+
+// closure as func parameter
+func getPizza(search: () -> ()) {
+    print("let's find some pizza")
+    
+    // call closure
+    search()
+}
+
+// passing closure to func
+getPizza(search: {
+    print("pizzahut is 4 km away")
+})
+// capture values from scope
+func someFunc(x: Int) -> (()-> Int) { // takes int and return closure
+    let closure = { x * 8 } // capturing value
+    return closure
+}
+let captureOne = someFunc(x: 5)
+let captureTwo = someFunc(x: 6)
+captureOne()
+captureTwo()
