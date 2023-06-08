@@ -588,3 +588,45 @@ for i in anotherCount {
 }
 
 // fallthrough
+
+
+
+
+
+
+
+
+
+// functions - blocks of code
+// func (no parameter) no return
+func doWork() {
+    let smth1 = 4
+    let smth2 = 9
+    let sum = smth2+smth1
+    print(sum)
+}
+doWork()
+
+func takeParametersNoReturn(parameterLabel parameterName: Int, by b: Int) {
+    let sum = parameterName * b
+    print(sum)
+}
+
+takeParametersNoReturn(parameterLabel: 5, by: 6)
+
+func takeUnnamedParameter(_ a: Int, by b: Int) {
+    print(a * b)
+}
+takeUnnamedParameter(9, by: 5)
+
+func returnValueNoParam() -> Int {
+    return 5 * 5
+}
+returnValueNoParam()
+
+func takeParamReturnValue(param: Int, pampam: Int) -> String {
+    let calc = param * pampam
+    let cast = String(calc)
+    return cast
+}
+takeParamReturnValue(param: 5, pampam: 7)
