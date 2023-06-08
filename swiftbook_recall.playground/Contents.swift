@@ -561,3 +561,30 @@ default:
     print("this is a consonant")
 }
 
+// control tranfer statemets
+//break, continue, fallthrough, return, throw
+
+// break - conditional code: if true -> continue, else -> break
+var checkCount = 100
+while checkCount != 0 {
+    checkCount -= 5
+    print(checkCount)
+    if checkCount == 25 {
+        break
+    }
+}
+
+// continue
+var anotherCount = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+for i in anotherCount {
+    anotherCount.removeFirst()
+    print("count is \(anotherCount.count)")
+    if anotherCount.isEmpty {
+        continue
+    }
+    anotherCount.append(i)
+    print("the value is \(anotherCount)")
+    
+}
+
+// fallthrough
