@@ -21,7 +21,7 @@ let someLet: Int = 0
 // Ints are preferable
 
 /*
- String - are the symbols surrounded with double qoutes
+ String - are the symbols surrounded with double quotes
  Char - single character
  Int - integer number
  Double(64bit)/Float(32bit) - floating point numbers, Double is preferable
@@ -34,9 +34,9 @@ print(sum)
 
 //type casting
 let myDouble = 3.5
-let myFloat = 3.5
+let myInt = 8
 
-var myFloatingPointNums = Double(myFloat) + myDouble
+var myFloatingPointNums = Double(myInt) + myDouble
 print(myFloatingPointNums)
 
 // type alias - reference to existing data type
@@ -45,7 +45,7 @@ let maxAmplitude = AudioSample.min
 
 // Bool type - false/true
 
-// Tuples - group of values of many different types, same types are supported too
+// Tuples - group of values of many different types, same types are also supported
 let myTuple = (42, "Hello!", true, 3.14)
 myTuple.0 // answer to everything access by index
 
@@ -60,7 +60,7 @@ let (answer, greet, _, piNum) = myTuple // all except bool
 // Optionals
 
 // used for absence of value
-// opt might be unwrapped
+// opt may be unwrapped
 
 var someOpt: String? // Optional, default value is nil
 // better to use with vars instead of lets
@@ -141,7 +141,7 @@ if let checkImplicitly = implicitlyOpt {
 // there is a mechanism allows you to work with possible errors in your code
 func division(a: Int, b: Int) throws -> Int { // throws = return
     // let's check condition with guard
-    guard b != 0 else { throw NSError(domain: "custom description - cause of error: can't divide by zero, code", code: 0) }
+    guard b != 0 else { throw NSError(domain: "custom description - cause of an error: can't divide by zero, code", code: 0) }
     return a / b
 }
 
@@ -149,10 +149,10 @@ func division(a: Int, b: Int) throws -> Int { // throws = return
 do {
     try division(a: 3, b: 1)
 } catch {
-    print(error.localizedDescription)
+    print(error.localizedDescription) // loacalized description is a NSError(domain)
 }
 
-// error handling as optional value
+// error handling as an optional value
 let result = try? division(a: 3, b: 0)
 if result != nil {
     print(result)
@@ -184,13 +184,13 @@ let binaryOperator = 3 * 2
 
 // ternary operator, as well as in Clang - there is only one
 // a ? b : c
-let someValue = true
-let answ1 = "this is true value"
-let answ2 = "this is false value"
-if someValue{
-    print(answ1)
+let someValue = true // A
+let answ1 = "condition B"
+let answ2 = "condition C"
+if someValue{ // a
+    print(answ1) // b
 } else {
-    print(answ2)
+    print(answ2) // c
 }
 let header = 40
 let hasHeader = true
@@ -204,9 +204,9 @@ if hasHeader {
 
 
 // remainder operator
-let aR = 9
-let bR = 4
-var reminder = aR % bR
+let aRem = 9
+let bRem = 4
+var reminder = aRem % bRem
 print(reminder) // 1
 // 9 = (4 * 4) + 1
 
@@ -273,13 +273,12 @@ if (1 < 2 || 4 > 5) && (2 != 3 && 6 < 9) {
 
 // types of value
 
-// String to create use String literals - sequence of characters(char) surrounded by double quotes "String"
+// String - to create use String literals - sequence of characters(char) surrounded by double quotes "String"
 let literallyString: String = "This is String literals"
 // multiline strings
 let multiline = """
-    first four spaces are multiline string scope
-    they are must be empty
-    and each new line must be started after four whitespaces
+    this is a multiline string
+    each new line must be started after four whitespaces
     String - value type
     you can loop thru strings
 """
@@ -294,9 +293,8 @@ for char in loopThru {
     // o
     // p
 }
-// string concatination
+// string concatenation
 var concatination = literallyString + multiline + " Hello, World!"
-let exclamation: Character = "!"
 print(concatination)
 
 print(loopThru)
@@ -311,12 +309,13 @@ extension StringProtocol {
 let directChar = loopThru[3]
 
 // insert & remove
+let exclamation: Character = "!"
 loopThru.append(exclamation)
 loopThru.removeLast()
 var hello = "hello"
-hello.insert(contentsOf: ", world", at: hello.endIndex) // hello, world
+hello.insert(contentsOf: ", world", at: hello.endIndex) // hello(.endIndex), world
 hello.remove(at: hello.index(hello.startIndex, offsetBy: 5))
-// remove at index-start from index 5 in hello string variable
+// remove at index: start from index 5 in hello string variable
 
 // Collections
 // array, set, dictionary
@@ -352,7 +351,8 @@ print(twoArrays.sorted())
 //set[] - stores unordered list of elements of the same type, the same elements will be ignored
 let ignoredItems: Set<Int> = [1,1,2,2,2,3,4,4,4,5,6,] // 1,2,3,4,5,6
 print(ignoredItems.sorted())
-// same mothods can be used
+print(ignoredItems.count) // 6 unique values
+// same methods can be used
 var someSet: Set<Int> = [1,2,3,4,5]
 someSet.count
 someSet.isEmpty
@@ -378,7 +378,7 @@ print(intersectionSet) // 1,2,3,4 common for both
 let difference = setOne.symmetricDifference(setTwo) // 5,6 - uncommon for both
 print(difference)
 
-// union - method create new set with elements from both sets, twins will be erased
+// union - method create new set with elements from both sets, only unique items
 let union = setOne.union(setTwo)
 print(union)
 
@@ -394,7 +394,7 @@ let subSetOf1 = setOne.isSubset(of: setThree)
 let superSetOf1 = setThree.isSuperset(of: setOne)
 print(superSetOf, superSetOf1, subSetOf, subSetOf1)
 
-// disjoint - return weither the both sets hava uncommon elemets
+// disjoint - return weither the both sets have uncommon elemets
 let disjointWith = setOne.isDisjoint(with: setFour)
 print(disjointWith) // true
 
@@ -456,15 +456,15 @@ for (animal, numOfLegs) in legs {
 }
 
 // if specific sequence is not needed you can ignore temp variable in for in loop using "_" underscore
-let base = 3
-let powerOf = 10
-var answerIs = 1
-for _ in 1...powerOf {
-    answerIs *= base
-    print("The \(base) to the power of \(powerOf) is \(answerIs)")
+let iterations = 10
+let multiplier = 4
+var operand = 1
+for _ in 1...iterations {
+    operand *= multiplier
+    print(operand)
 }
 
-// while loop - checks condition before each new iteration, executes until condition is true
+// while loop - checks if condition is true before each new iteration, executes until condition is true
 var countDown = 19
 while countDown != 0 {
     countDown -= 1
@@ -481,4 +481,6 @@ repeat {
     numberOne += 1
 } while numberOne < 10
 print("final number is \(numberOne)")
+
+// June 8 2023
 
