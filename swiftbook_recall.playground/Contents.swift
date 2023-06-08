@@ -484,3 +484,80 @@ print("final number is \(numberOne)")
 
 // June 8 2023
 
+// switch - matching items with possible values
+let lookingForValue = "Spring"
+switch lookingForValue {
+    case "Summer":
+        print("Finally summer!")
+    case "Spring":
+        print("Hooray! it's spring")
+    default:
+        print("It must be autumn or winter")
+}
+// switch must be exhaustive, it means you need to set all possible condition, default case needed
+
+// matching intervals
+let intervalValue = 62
+switch intervalValue {
+    case 0:
+        print("you value is equal to zero")
+    case 1...20:
+        print("your value is in interval from 1 to 20")
+    case 21...70:
+        print("your value is in interval from 21 to 100")
+    default:
+        print("your value out of intervals")
+}
+
+// two values in  one case
+let letterA = "a"
+switch letterA {
+    case "a", "A":
+        print("your letter is A")
+    case "b", "B":
+        print("your letter is B")
+    default:
+        print("try another alphabet")
+}
+
+// tuples
+// allows to use multiple values in switch statement
+// each element of tuple may be checked with different values or interlav values
+// you can use _ - wildcard pattern to skip one value
+
+// value bindings
+var scores = (56, 67)
+switch scores {
+    case(0,0):
+        print("you have no scores, begin test get scores")
+    case(100, 100):
+        print("Perfect scores!")
+    case(_, 60...100):
+        print("Swift theory passed")
+    case(55...99, _):
+        print("Swift coding passed")
+    default:
+        print("both failed")
+}
+
+// where
+switch scores {
+    case (0,0):
+        print("begin test")
+    case (100, 100):
+        print("prefect scores")
+    case let (theory, practice) where theory >= 60 && practice >= 55:
+        print("passed both")
+    default:
+        print("both failed")
+}
+
+// compaund cases
+let someChar = "u"
+switch someChar {
+case "a","o","u","e", "i":
+    print("this is a vovel")
+default:
+    print("this is a consonant")
+}
+
