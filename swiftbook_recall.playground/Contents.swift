@@ -1,6 +1,7 @@
 // June 3 2023
 
 import Foundation
+import UIKit
 
 // my notes from Swift language guideline
 // Total Recall of what I learned
@@ -464,6 +465,11 @@ for _ in 1...iterations {
     print(operand)
 }
 
+let namesAr = ["Paul", "Sam", "Hank"]
+for i in namesAr {
+    print("Hello, \(i)")
+}
+
 // while loop - checks if condition is true before each new iteration, executes til condition is true
 var countDown = 19
 while countDown != 0 {
@@ -620,9 +626,6 @@ func chooseBestColor() -> String {
 }
  
 
-
-
-
 // functions - blocks of code that performs a specific tasks
 // to use func -> define one -> call func()
 
@@ -673,7 +676,7 @@ returnMultiplyParam()
 do { //called with keyword "do"
     print("this is a message from simple closure")
 }
-//  {(parameter)->return type in - keyword in is optional, separates closure definition from its body
+//  {(parameter)->return type in - keyword "in" is optional, separates closure definition from its body
 //      statement
 //}
 
@@ -702,7 +705,7 @@ findArea(3)
 
 // anonymous value
 let rectArea: (Int) -> (Int) = { $0 * $0 }
-// const reference to int->int closure, whis is a multiplication on it self $0-1st param, $1-2nd param(if exist) and so on
+// const reference to int->int closure, which is a multiplication on it self $0-1st param, $1-2nd param(if exist) and so on
 print(rectArea(5))
 // with two or more parameters
 let rectArea2: (Int, Int, Int) -> (Int) = { ($0 * $1) / $2 }
@@ -731,3 +734,144 @@ let captureTwo = someFunc(x: 6)
 captureOne()
 captureTwo()
 
+//June 11 2023
+
+// Enumerations - set the common type for group of related values and allow safety work with it
+// is case of enum has a value it's called raw value, and it could be String, Char, Int, Double, Float
+enum CompasPoint {
+    case north
+    case south
+    case west // enumeration case
+    case east
+}
+
+// multiple cases with all possible cases in one line
+enum Planet { // enum name is always singular and Capitalized
+    case mercury, venus, earth, mars, jupiter, saturn
+}
+
+enum PlanetList {
+    case mercury
+    case venus
+    case earth
+    case mars
+}
+// each enum case defines new type
+var direction = CompasPoint.north
+var myPlanet = Planet.earth
+myPlanet = .mercury
+// switch with enum matching values
+switch direction {
+case .north:
+    print("Direction is North")
+case .south:
+    print("Direction is S")
+case .east:
+    print("Direction is E")
+    // do smthg, call func, set new value to some var
+case .west:
+    print("Direction is W")
+}
+
+func choseSpacetravel(orbitOf selection: PlanetList) {
+    switch selection {
+    case .mercury:
+        print("let's go the first from the Sun")
+    case .venus:
+        print("greenhouse effect, high pressure and 280 degrees Celsius - great choice")
+    case .mars:
+        print("Go Elon!")
+    case .earth:
+        print("home, sweet home")
+    // no need default case when matching enum
+    }
+}
+
+choseSpacetravel(orbitOf: .venus)
+
+// associated values - may be a different data types
+enum Barcode {
+    case upc (Int, Int) // define type of valu but doesn't have a value
+    case qr (String)
+}
+var newCode = Barcode.upc(8, 111332123)
+
+enum Element {
+    case helium(atomicMass: Double)
+    case carbon(atomicMass: Double)
+    case hydrogen(atomicMass: Double)
+}
+func getAtomicMass(for element: Element) {
+    switch element {
+    case .carbon(let atomicMass):
+        if atomicMass ==  12.011{
+            print("this is carbon")
+        }
+    case .helium(let atomicMass) where atomicMass >= 4.002602:
+        print("this is helium")
+    case .hydrogen(let atomicMass):
+        if atomicMass == 1.00784 {
+            print("this is hydrogen")
+        }
+    default:
+        print("unknown element")
+    }
+}
+getAtomicMass(for: .carbon(atomicMass: 12.011))
+
+enum Social {
+    case twitter(followers: Int)
+    case youtube(subscibers: Int)
+}
+
+func getSponsorshipEligibility(for platfom: Social) {
+    switch platfom {
+    case .twitter(let followers) where followers > 10_000:
+        print("Eligible for sponsorship")
+    case .youtube(let subscibers) where subscibers > 25_000:
+        print("Eligible for sponsorship")
+    case .twitter, .youtube:
+        print("Not eligible for sponsorship")
+    }
+}
+getSponsorshipEligibility(for: .twitter(followers: 2000))
+
+// raw values
+enum Value: Int {
+    case one = 1 // 1 is a raw value
+}
+
+enum Device: String, CaseIterable {
+    case infinix  = "My astronomical android buddy, with NFC btw"
+    case iphone   = "My little 12"
+    case mbp2012  = "Old buddy of mine, always helped me out"
+    case ipad     = "finally I got it"
+}
+// access to rawValue
+func getOpinion (about device: Device) {
+    let opinion = device.rawValue
+    print(opinion)
+}
+getOpinion(about: .infinix)
+getOpinion(about: .mbp2012)
+
+enum AnotherPlanet: Int {
+    case mercury = 1
+    case venus
+}
+let hotPlanet = AnotherPlanet(rawValue: 1)
+
+// iterate
+enum Drink: CaseIterable { // puts all cases into a collection
+    case coffee
+    case tea
+    case soda
+}
+print(Drink.allCases.count)
+for drink in Drink.allCases {
+    print(drink)
+}
+
+for opinion in Device.allCases {
+    print(opinion.rawValue)
+}
