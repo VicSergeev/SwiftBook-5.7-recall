@@ -141,7 +141,7 @@ if let checkImplicitly = implicitlyOpt {
 // there is a mechanism allows you to work with possible errors in your code
 func division(a: Int, b: Int) throws -> Int { // throws = return
     // let's check condition with guard
-    guard b != 0 else { throw NSError(domain: "custom description - cause of an error: can't divide by zero, code", code: 0) }
+    guard b != 0 else { throw NSError(domain: "custom description - cause of an error: can't divide by zero, only Chuck Norris can. code", code: 0) }
     return a / b
 }
 
@@ -153,7 +153,7 @@ do {
 }
 
 // error handling as an optional value
-let result = try? division(a: 3, b: 0)
+let result = try? division(a: 3, b: 1)
 if result != nil {
     print(result)
 } else {
@@ -306,7 +306,7 @@ extension StringProtocol {
         self[index(startIndex, offsetBy: offset)]
     }
 }
-let directChar = loopThru[3]
+let directChar = loopThru[3] // "p"
 
 // insert & remove
 let exclamation: Character = "!"
@@ -315,7 +315,7 @@ loopThru.removeLast()
 var hello = "hello"
 hello.insert(contentsOf: ", world", at: hello.endIndex) // hello(.endIndex), world
 hello.remove(at: hello.index(hello.startIndex, offsetBy: 5))
-// remove at index: start from index 5 in hello string variable
+// also may be read as remove from, variable called "hello", and its index: start from index 5
 
 // Collections
 // array, set, dictionary
@@ -451,11 +451,11 @@ for (key, value) in someDict {
 
 // for in loop - can be used with dictionaries, decompose it to tuple
 var legs = ["Cat":4, "Human":2]
-for (animal, numOfLegs) in legs {
+for (animal, numOfLegs) in legs { // creating tuple
     print("\(animal) has \(numOfLegs) legs")
 }
 
-// if specific sequence is not needed you can ignore temp variable in for in loop using "_" underscore
+// if specific sequence is not needed you can ignore temp variable in "for in loop" using "_" underscore
 let iterations = 10
 let multiplier = 4
 var operand = 1
@@ -464,7 +464,7 @@ for _ in 1...iterations {
     print(operand)
 }
 
-// while loop - checks if condition is true before each new iteration, executes until condition is true
+// while loop - checks if condition is true before each new iteration, executes til condition is true
 var countDown = 19
 while countDown != 0 {
     countDown -= 1
@@ -520,7 +520,7 @@ switch letterA {
         print("try another alphabet")
 }
 
-// tuples
+// tuples in swicth
 // allows to use multiple values in switch statement
 // each element of tuple may be checked with different values or interlav values
 // you can use _ - wildcard pattern to skip one value
@@ -562,7 +562,7 @@ default:
 }
 
 // control tranfer statemets
-//break, continue, fallthrough
+//  break, continue, fallthrough
 
 // break - conditional code: if true -> continue, else -> break
 var checkCount = 100
@@ -730,3 +730,4 @@ let captureOne = someFunc(x: 5)
 let captureTwo = someFunc(x: 6)
 captureOne()
 captureTwo()
+
