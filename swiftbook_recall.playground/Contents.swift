@@ -20,6 +20,7 @@ let someLet: Int = 0
  */
 
 // Swift support (signed)Ints and (unsigned)UInts UInt8,16,32,64,128
+// UInt 128 Int -127...127
 // Ints are preferable
 
 /*
@@ -330,6 +331,19 @@ print(twinsDoubles)
 // array concatenation, ONLY THE SAME TYPE
 var twoArrays = immutableArray + mutableArray
 print(twoArrays)
+
+// June 27 2023
+// Any
+
+let anyArray: [Any] = [
+    "String",
+    123,
+    23.5,
+    true
+]
+
+// it is more useful to use tuple to store different types together
+
 // accessing & modifying
 twoArrays.count
 twoArrays.append(8)
